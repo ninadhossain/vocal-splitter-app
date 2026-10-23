@@ -1,6 +1,11 @@
+demucs-onnx>=0.3.0
+onnxruntime>=1.16.0
+soundfile>=0.12.1
+numpy>=1.24.0
+huggingface-hub>=0.16.0
+soxr>=0.3.0
 demucs>=4.0.0
 torch>=2.0.0
 torchaudio>=2.0.0
-soundfile>=0.12.1
 scipy>=1.11.0
-numpy>=1.24.0
+

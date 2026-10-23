@@ -9,6 +9,13 @@ import sys
 import argparse
 import json
 import time
+from typing import cast
+
+# Ensure local portable python_env packages are discoverable if available
+_local_site_packages = os.path.join(os.path.dirname(os.path.abspath(__file__)), "python_env", "Lib", "site-packages")
+if os.path.isdir(_local_site_packages) and _local_site_packages not in sys.path:
+    sys.path.insert(0, _local_site_packages)
+
 import numpy as np
 
 def report_progress(pct, step):
@@ -31,6 +38,8 @@ def main():
         import onnxruntime as ort
         import soundfile as sf
         import demucs_onnx
+        import demucs_onnx._hub as demucs_hub
+        import demucs_onnx._audio as demucs_audio
         from demucs_onnx import load_audio, write_audio
         from demucs_onnx.inference import (
             N_CHANNELS, N_SAMPLES, SEGMENT_S, SAMPLE_RATE,
@@ -56,7 +65,7 @@ def main():
     if not model_path:
         report_progress(10, "Loading Demucs v4 Neural Weights")
         try:
-            model_path = str(demucs_onnx._hub.download_single_model("htdemucs", precision="fp16weights"))
+            model_path = str(demucs_hub.download_single_model("htdemucs", precision="fp16weights"))
         except Exception as e:
             sys.stderr.write(f"Model load error: {e}\n")
             sys.exit(1)
@@ -106,7 +115,8 @@ def main():
         chunk_len = end - start
         w = window[:chunk_len]
 
-        stems_res = session.run(["stems"], {"mix": x})[0][0]  # (4, 2, N)
+        raw_outputs = session.run(["stems"], {"mix": x})
+        stems_res = cast(np.ndarray, raw_outputs[0])[0]  # (4, 2, N)
         for s in sources:
             row = sources.index(s)
             out[s][:, start:end] += stems_res[row, :, :chunk_len] * w
@@ -123,8 +133,7 @@ def main():
 
     # 5. Resample back to native rate if needed
     if native_sr != SAMPLE_RATE:
-        from demucs_onnx._audio import resample_to_native
-        out = {s: resample_to_native(arr, SAMPLE_RATE, native_sr) for s, arr in out.items()}
+        out = {s: demucs_audio.resample_to_native(arr, SAMPLE_RATE, native_sr) for s, arr in out.items()}
 
     # 6. Save separated files
     if args.mode == "2-stem":

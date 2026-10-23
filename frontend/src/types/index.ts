@@ -39,7 +39,7 @@ export interface Job {
 }
 
 export interface ChannelControlState {
-  volume: number; // 0.0 to 1.5
+  volume: number; // 0.0 to 1.0
   pan: number;    // -1.0 (Left) to +1.0 (Right)
   isMuted: boolean;
   isSolo: boolean;

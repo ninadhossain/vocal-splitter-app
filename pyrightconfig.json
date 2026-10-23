@@ -1,0 +1,12 @@
+{
+  "include": [
+    "worker"
+  ],
+  "extraPaths": [
+    "worker/python_env/Lib/site-packages",
+    "worker"
+  ],
+  "pythonVersion": "3.11",
+  "pythonPlatform": "Windows",
+  "reportMissingImports": "warning"
+}

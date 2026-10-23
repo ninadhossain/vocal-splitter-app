@@ -1,0 +1,11 @@
+{
+  "include": [
+    "."
+  ],
+  "extraPaths": [
+    "./python_env/Lib/site-packages",
+    "."
+  ],
+  "pythonVersion": "3.11",
+  "pythonPlatform": "Windows"
+}

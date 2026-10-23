@@ -110,7 +110,12 @@ export function ChannelStrip({
       effectiveVol = controlState.isMuted ? 0 : controlState.volume * masterVolume;
     }
 
-    waveSurferRef.current.setVolume(Math.max(0, Math.min(1.5, effectiveVol)));
+    const safeVol = Math.max(0, Math.min(1.0, Number.isFinite(effectiveVol) ? effectiveVol : 0));
+    try {
+      waveSurferRef.current.setVolume(safeVol);
+    } catch (err) {
+      console.warn('Failed to set stem volume:', err);
+    }
   }, [controlState.volume, controlState.isMuted, controlState.isSolo, anySoloActive, masterVolume, isLoaded]);
 
   const toggleMute = () => {
@@ -199,7 +204,7 @@ export function ChannelStrip({
             <input
               type="range"
               min="0"
-              max="1.5"
+              max="1"
               step="0.01"
               value={controlState.volume}
               onChange={handleVolumeSlider}

@@ -298,7 +298,7 @@ export function MultiTrackPlayer({
             <input
               type="range"
               min="0"
-              max="1.5"
+              max="1"
               step="0.01"
               value={masterVolume}
               onChange={(e) => setMasterVolume(parseFloat(e.target.value))}
