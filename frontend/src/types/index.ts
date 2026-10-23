@@ -44,3 +44,64 @@ export interface ChannelControlState {
   isMuted: boolean;
   isSolo: boolean;
 }
+
+// User & Auth Types
+export type UserRole = 'user' | 'admin' | 'superadmin';
+export type UserStatus = 'active' | 'suspended';
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  status: UserStatus;
+  packageSlug: string;
+  packageDetails?: Package;
+  separationsThisMonth: number;
+  isVerified?: boolean;
+  createdAt?: string;
+}
+
+export interface AuthResponse {
+  success: boolean;
+  message?: string;
+  token: string;
+  user: User;
+}
+
+// Package / Subscription Tier Types
+export interface Package {
+  id: string;
+  name: string;
+  slug: string;
+  priceMonthly: number;
+  priceYearly: number;
+  description: string;
+  trackLimit: number; // -1 for unlimited
+  maxDuration: number; // in seconds
+  allowedModes: StemMode[];
+  features: string[];
+  badge?: string;
+  isActive: boolean;
+  isPopular: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+// Mail Server / SMTP Types (matches superadmin screenshot)
+export interface MailServer {
+  id: string;
+  label: string;
+  host: string;
+  port: number;
+  username: string;
+  password?: string;
+  fromEmail: string;
+  secure: boolean;
+  isActive: boolean;
+  lastTestedAt?: string;
+  lastTestStatus?: 'success' | 'failed' | 'untested';
+  lastTestMessage?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}

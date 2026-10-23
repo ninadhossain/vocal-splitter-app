@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Header } from '@/components/Header';
 import { Dropzone } from '@/components/Dropzone';
 import { ProcessingView } from '@/components/ProcessingView';
@@ -119,7 +120,7 @@ export default function Home() {
             />
 
             {/* Feature Highlights Grid */}
-            <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 px-4">
+            <div id="features" className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 mt-14 px-4">
               <div className="glass-panel rounded-2xl p-6 space-y-3 border border-white/5 hover:border-cyan-500/20 transition-all">
                 <div className="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center">
                   <Cpu className="w-5 h-5 text-cyan-400" />
@@ -156,20 +157,83 @@ export default function Home() {
                 </p>
               </div>
             </div>
+
+            {/* How It Works Section */}
+            <div className="w-full max-w-5xl mx-auto mt-16 px-4">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-white tracking-tight">How It Works in 3 Steps</h3>
+                <p className="text-xs text-slate-400 mt-1">From raw audio to studio-ready stems in seconds.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-[#0F172A] border border-white/10 rounded-2xl p-6 text-center space-y-3">
+                  <div className="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-extrabold flex items-center justify-center mx-auto text-sm border border-cyan-500/30">
+                    1
+                  </div>
+                  <h4 className="text-sm font-bold text-white">Upload Your Audio</h4>
+                  <p className="text-xs text-slate-400">
+                    Drag and drop any MP3, WAV, FLAC, or AAC track into our secure upload engine.
+                  </p>
+                </div>
+
+                <div className="bg-[#0F172A] border border-white/10 rounded-2xl p-6 text-center space-y-3">
+                  <div className="w-10 h-10 rounded-full bg-violet-500/20 text-violet-400 font-extrabold flex items-center justify-center mx-auto text-sm border border-violet-500/30">
+                    2
+                  </div>
+                  <h4 className="text-sm font-bold text-white">AI Neural Isolation</h4>
+                  <p className="text-xs text-slate-400">
+                    Demucs v4 deep learning separates vocals, drums, bass, and instruments at 44.1kHz.
+                  </p>
+                </div>
+
+                <div className="bg-[#0F172A] border border-white/10 rounded-2xl p-6 text-center space-y-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-extrabold flex items-center justify-center mx-auto text-sm border border-emerald-500/30">
+                    3
+                  </div>
+                  <h4 className="text-sm font-bold text-white">Audition & Download</h4>
+                  <p className="text-xs text-slate-400">
+                    Fine-tune volume and pan in the multi-track player, then export individual stems or a ZIP.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Pricing Banner CTA */}
+            <div className="w-full max-w-5xl mx-auto mt-16 px-4">
+              <div className="relative rounded-3xl p-8 sm:p-10 bg-gradient-to-r from-cyan-950/80 via-slate-900 to-violet-950/80 border border-cyan-500/30 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+                <div>
+                  <h3 className="text-2xl font-bold text-white tracking-tight">Ready for Studio-Grade Separation?</h3>
+                  <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
+                    Get started with our Free Starter plan or unlock unlimited track separations and 6-stem isolation with Creator Pro & Studio tiers.
+                  </p>
+                </div>
+                <div className="flex items-center space-x-3 flex-shrink-0">
+                  <Link
+                    href="/pricing"
+                    className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-violet-600 hover:from-cyan-400 hover:to-violet-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-cyan-500/20 transition-all"
+                  >
+                    View All Plans & Pricing
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t border-white/5 bg-[#070A12] py-6 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <footer className="w-full border-t border-white/5 bg-[#070A12] py-8 text-center text-xs text-slate-500 mt-12">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2">
             <span className="w-2 h-2 rounded-full bg-cyan-400" />
             <span className="text-slate-400 font-medium">SonicSplit AI • Meta Demucs v4 + Wavesurfer.js</span>
           </div>
-          <p className="text-slate-500">
-            Powered by Next.js App Router, Express API Gateway & MongoDB
-          </p>
+          <div className="flex items-center space-x-5 text-xs text-slate-400">
+            <Link href="/" className="hover:text-white transition-colors">Studio</Link>
+            <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
+            <Link href="/auth/signin" className="hover:text-white transition-colors">Sign In</Link>
+            <Link href="/auth/signup" className="hover:text-white transition-colors">Sign Up</Link>
+            <Link href="/admin" className="text-cyan-400 hover:text-cyan-300 transition-colors">Superadmin</Link>
+          </div>
         </div>
       </footer>
     </div>

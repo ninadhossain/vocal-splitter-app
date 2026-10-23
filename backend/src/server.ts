@@ -6,6 +6,10 @@ import { connectDB } from './config/db';
 import uploadRouter from './routes/upload';
 import jobsRouter from './routes/jobs';
 import stemsRouter from './routes/stems';
+import authRouter from './routes/auth';
+import packagesRouter from './routes/packages';
+import mailServersRouter from './routes/mailServers';
+import adminRouter from './routes/admin';
 import { STEMS_DIR, UPLOADS_DIR } from './config/storage';
 
 dotenv.config();
@@ -41,6 +45,10 @@ app.get('/api/health', (_req, res) => {
 app.use('/api/upload', uploadRouter);
 app.use('/api/jobs', jobsRouter);
 app.use('/api/stems', stemsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/packages', packagesRouter);
+app.use('/api/admin/mail-servers', mailServersRouter);
+app.use('/api/admin', adminRouter);
 
 // Error Handling Middleware
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {

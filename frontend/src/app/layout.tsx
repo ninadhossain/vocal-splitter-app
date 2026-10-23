@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   keywords: ["vocal remover", "stem separator", "demucs v4", "splitter ai", "audio mastering", "multitrack player"],
 };
 
+import { AuthProvider } from "@/context/AuthContext";
+
 export default function RootLayout({
   children,
 }: {
@@ -32,7 +34,9 @@ export default function RootLayout({
       className={`${jakarta.variable} ${jetbrainsMono.variable} dark h-full`}
     >
       <body className="min-h-full bg-[#080B14] text-slate-100 font-sans antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
