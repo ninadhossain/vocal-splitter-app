@@ -1,0 +1,16 @@
+{
+  "name": "ai-audio-stem-separator",
+  "version": "1.0.0",
+  "description": "Production-grade AI Audio Stem Separator (Vocal Remover & 4-Stem Splitter) with Next.js, Express, Demucs v4 & MongoDB",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n \"API,FRONTEND\" -c \"cyan,magenta\" \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "install:all": "npm install && npm install --prefix backend && npm install --prefix frontend",
+    "build:frontend": "npm run build --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
